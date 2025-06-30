@@ -1,11 +1,16 @@
 import React from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import AuthPage from './components/AuthPage';
 import UserProfile from './components/UserProfile';
 
 const App: React.FC = () => {
     return (
         <div className="App">
-            <h1>Fitness Tracker</h1>
-            <UserProfile />
+            <Router>
+                <Routes>
+                    <Route path="/" element={<AuthPage />} />
+                </Routes>
+            </Router>
         </div>
     );
 };

@@ -4,12 +4,19 @@ import axios from 'axios';
 const UserProfile: React.FC = () => {
     const [username, setUsername] = useState('');
     const [goals, setGoals] = useState('');
+    const [success, setSuccess] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Submit user data to the backend
-        await axios.post('/api/users', { username, goals });
-        // Handle response (e.g., show success message)
+         try {
+            await axios.post('http://localhost:5000/api/users', { username, goals });
+            setSuccess(true); // Show success message
+            setUsername('');
+            setGoals('');
+        } catch (error) {
+            setSuccess(false);
+            // Optionally handle error
+        }
     };
 
     return (
@@ -27,6 +34,7 @@ const UserProfile: React.FC = () => {
                 onChange={(e) => setGoals(e.target.value)}
             />
             <button type="submit">Save Profile</button>
+              {success && <p style={{ color: 'green' }}>Profile saved successfully!</p>}
         </form>
     );
 };

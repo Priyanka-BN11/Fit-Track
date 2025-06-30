@@ -17,21 +17,40 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Install dependencies
+      - name: Install Frontend Dependencies
         run: |
           cd frontend
           npm install
-          cd ../backend
+
+      - name: Build Frontend
+        run: |
+          cd frontend
+          npm run build
+
+      - name: Run Frontend Tests
+        run: |
+          cd frontend
+          npm test -- --watchAll=false
+
+      - name: Install Backend Dependencies
+        run: |
+          cd backend
           npm install
 
-      - name: Build the application
+      - name: Run Backend Tests
         run: |
-            cd frontend
-            npm run build
-            cd ../backend
-            npm run build
-        
-      - name: Deploy to GitHub Pages
+          cd backend
+          npm test
+
+      - name: Deploy Frontend to GitHub Pages
         run: |
-            npm run deploy
-    
+          cd frontend
+          npm run deploy  # Ensure the deploy script is set up in package.json
+
+      - name: Deploy Backend
+        run: |
+          cd backend
+          # Add deployment commands here (e.g., for Heroku, AWS, etc.)
+          # Example for Heroku:
+          # git remote add heroku https://git.heroku.com/YOUR_HEROKU_APP.git
+          # git push heroku main
