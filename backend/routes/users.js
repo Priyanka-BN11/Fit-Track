@@ -27,7 +27,28 @@ router.post('/login', async (req, res) => {
    if (!isMatch) {
        return res.status(401).json({ error: 'Invalid credentials' });
    }
+   // check if profile is completed
+   if (!user.profileCompleted) {
+       return res.status(200).json({ message: 'Please complete your profile' , user});
+   }
    res.status(200).json({ message: 'Login successful', user });
+});
+
+// Update user profile
+router.put('/:id/profile', async (req, res) => {
+    const { goals } = req.body;
+    try {
+        const user = await User.findByIdAndUpdate(req.params.id);
+        if(!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        user.goals = goals;
+        user.profileCompleted = true; // Mark profile as completed
+        await user.save();
+        res.status(200).json({ message: 'Profile updated successfully', user });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 });
 
 module.exports = router;

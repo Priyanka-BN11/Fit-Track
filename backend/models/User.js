@@ -20,6 +20,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: '', // Allow goals to be optional
     },
+    profileCompleted:{
+        type: Boolean,
+        default: false, // Default to false, indicating profile is not completed
+    },
+    createdAt:{
+        type: Date,
+        default: Date.now, // Automatically set the creation date
+    }
    
 });
 

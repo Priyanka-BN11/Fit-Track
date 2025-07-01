@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './AuthPage.css';
 
 const AuthPage: React.FC = () => {
@@ -8,14 +8,23 @@ const AuthPage: React.FC = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Hook for navigation
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
             const endpoint = isLogin ? 'http://localhost:5000/api/users/login' : 'http://localhost:5000/api/users/signup';
             const data = isLogin ? { username, password } : { username, email, password };
-            await axios.post(endpoint, data);
+            const response = await axios.post(endpoint, data);
             alert(isLogin ? 'Login successful!' : 'Signup successful!');
+            if(isLogin) {
+                // Redirect to dashboard or home page after login
+                if(response.data.message === 'Profile incomplete') {
+                    navigate('/userprofile');
+                } else {
+                    navigate('/progressdashboard');
+                }
+            }
         } catch (error) {
             console.error('Error during authentication:', error);
             alert('Authentication failed. Please try again.');

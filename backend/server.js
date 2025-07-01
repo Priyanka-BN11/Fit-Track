@@ -7,7 +7,7 @@ const userRoutes = require('./routes/users');
 const app = express();
 app.use(cors());
 app.use(express.json());
-const mongoURI = 'mongodb+srv://priyankabangalorenagaraja:Priyapj-11@fit-tracker.fni4szb.mongodb.net/fittrack?retryWrites=true&w=majority';
+const mongoURI = 'mongodb+srv://priyankabangalorenagaraja:Priyapj11@fit-tracker.fni4szb.mongodb.net/fittrack?retryWrites=true&w=majority';
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
