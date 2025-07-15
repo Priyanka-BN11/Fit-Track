@@ -15,12 +15,22 @@ h1 {
 }
 
 input {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
+  
 }
+select {
+    width: 51.5%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+}
+
 
 button {
     width: 100%;

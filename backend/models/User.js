@@ -16,6 +16,26 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    fullname:{
+        type: String,
+       default: '', // Allow fullname to be optional
+    },
+    age:{
+        type: Number,
+        default:''
+    },
+    gender: {
+        type: String,
+        default: '', // 
+    },
+    height: {
+        type: Number,
+        default: '',
+    },
+    weight: {
+        type: Number,
+        default: '',
+    },
     goals: {
         type: String,
         default: '', // Allow goals to be optional

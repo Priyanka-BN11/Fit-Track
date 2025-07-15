@@ -1,12 +1,15 @@
+require('dotenv').config();
+
+const authRoutes = require('./routes/auth');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
 const userRoutes = require('./routes/users');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/api/auth', authRoutes);
 const mongoURI = 'mongodb+srv://priyankabangalorenagaraja:Priyapj11@fit-tracker.fni4szb.mongodb.net/fittrack?retryWrites=true&w=majority';
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,
